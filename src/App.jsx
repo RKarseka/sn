@@ -1,17 +1,16 @@
-import { Header } from './components/header';
-import { Nav } from './components/nav/nav';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
+import { Messages } from './pages/messages';
 
 function App() {
   return (
-    <>
-      <Header />
-      <div className="App">
-        <h1>Social newtwork</h1>
-      </div>
-      <Nav />
-      <MainPage />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<MainPage />} />
+        <Route path="messages" element={<Messages />} />
+      </Route>
+    </Routes>
   );
 }
 

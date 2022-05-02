@@ -8,7 +8,20 @@ body {
 }
 
 .App {
-  height: 100vh;
+  /* height: 100vh; */
   display: grid;
   place-content: center;
+}
+
+:root {
+  --color-accent: #3f4156;
+  --color-white: #ffffff;
+  --color-back: #ebf1f6;
+  --color-gray: gray;
+}
+
+#root {
+  margin: 0 auto;
+  max-width: 1200px;
+  background-color: var(--color-back);
 }

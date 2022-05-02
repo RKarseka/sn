@@ -1,8 +1,17 @@
+import { Header } from './components/header';
+import { Nav } from './components/nav/nav';
+import { MainPage } from './pages/main';
+
 function App() {
   return (
-    <div className="App">
-      <h1>Social newtwork</h1>
-    </div>
+    <>
+      <Header />
+      <div className="App">
+        <h1>Social newtwork</h1>
+      </div>
+      <Nav />
+      <MainPage />
+    </>
   );
 }
 

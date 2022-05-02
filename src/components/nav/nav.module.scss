@@ -1,0 +1,16 @@
+@import '../../scss/main.scss';
+
+.list {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  grid-gap: 30px;
+}
+
+.item {
+  cursor: pointer;
+  &_disabled {
+    cursor: auto;
+    color: var(--color-gray);
+  }
+}

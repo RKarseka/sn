@@ -4,12 +4,10 @@ import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
 import { Timeline } from './pages/timeline';
+import { addPost } from './state';
 
-import { state } from './state.js';
-
-function App() {
-  const { msgs, users } = state;
-  console.log(msgs);
+function App({ state }) {
+  const { msgs, users, profilePage } = state;
 
   return (
     <Routes>
@@ -19,7 +17,10 @@ function App() {
           path="messages/*"
           element={<Messages messages={msgs} users={users} />}
         />
-        <Route path="timeline" element={<Timeline />} />
+        <Route
+          path="timeline"
+          element={<Timeline profilePage={profilePage} addPost={addPost} />}
+        />
         <Route path="friends" element={<Friends friends={users} />} />
       </Route>
     </Routes>

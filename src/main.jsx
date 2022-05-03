@@ -4,11 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import './scss/_normalise.scss';
+import { state } from './state';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <App state={state} />
     </BrowserRouter>
   </React.StrictMode>
 );

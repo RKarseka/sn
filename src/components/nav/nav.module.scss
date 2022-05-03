@@ -13,12 +13,17 @@
   grid-auto-flow: column;
   justify-content: start;
   grid-gap: 30px;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 }
 
 .item {
   cursor: pointer;
   &_disabled {
-    cursor: auto;
     color: var(--color-gray);
+    a {
+      cursor: auto;
+    }
   }
 }

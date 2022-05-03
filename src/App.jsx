@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Friends } from './pages/friends';
 import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
@@ -11,6 +12,7 @@ function App() {
         <Route index element={<MainPage />} />
         <Route path="messages/*" element={<Messages />} />
         <Route path="timeline" element={<Timeline />} />
+        <Route path="friends" element={<Friends />} />
       </Route>
     </Routes>
   );

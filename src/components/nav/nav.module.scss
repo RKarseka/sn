@@ -1,5 +1,13 @@
 @import '../../scss/main.scss';
 
+.container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 30px;
+  justify-content: start;
+  align-items: center;
+}
+
 .list {
   display: grid;
   grid-auto-flow: column;

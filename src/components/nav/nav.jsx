@@ -1,20 +1,24 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { UserPhoto } from '../user-photo';
 import styles from './nav.module.scss';
 
 export const Nav = () => {
   return (
-    <nav className={styles.wrapper}>
+    <nav className={classNames(styles.wrapper, styles.container)}>
+      <UserPhoto />
       <ul className={styles.list}>
         <li className={classNames(styles.item, styles.item_disabled)}>
-          <Link to={'/'}>Timeline</Link>
+          <NavLink to={'/'}>About</NavLink>
         </li>
-        <li className={classNames(styles.item, styles.item_disabled)}>About</li>
+        <li className={classNames(styles.item, styles.item_disabled)}>
+          <NavLink to={'/timeline'}>Timeline</NavLink>
+        </li>
         <li className={classNames(styles.item, styles.item_disabled)}>
           Friends
         </li>
         <li className={classNames(styles.item, styles.item_disabled)}>
-          <Link to={'/messages'}>Messages</Link>
+          <NavLink to={'/messages'}>Messages</NavLink>
         </li>
       </ul>
     </nav>

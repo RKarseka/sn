@@ -6,9 +6,9 @@ export const Layout = () => {
   return (
     <>
       <Header />
-      <div className="App">
+      {/* <div className="App">
         <h1>Social newtwork</h1>
-      </div>
+      </div> */}
       <Nav />
       <Outlet />
     </>

@@ -22,7 +22,7 @@ export const Timeline = ({ posts, onAddPost }) => {
         />
         <button
           onClick={() => {
-            onAddPost();
+            onAddPost(input);
             setInput('');
           }}
         >

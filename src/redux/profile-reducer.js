@@ -18,8 +18,7 @@ export const profileReducer = (state = initialState, { type, payload }) => {
         id: state.posts.reduce((acc, { id }) => (acc > id ? acc : id), 0) + 1,
         text: payload,
       };
-      state.posts.push(newPost);
-      return state;
+      return { ...state, posts: [...state.posts, newPost] };
     default:
       return state;
   }

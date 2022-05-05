@@ -4,10 +4,11 @@ import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
 import { Timeline } from './pages/timeline';
-import { addPost } from './state';
 
-function App({ state }) {
-  const { msgs, users, profilePage } = state;
+function App({ store }) {
+  const { dispatch } = store;
+
+  const { msgs, users, profilePage } = store.getState();
 
   return (
     <Routes>
@@ -19,7 +20,12 @@ function App({ state }) {
         />
         <Route
           path="timeline"
-          element={<Timeline profilePage={profilePage} addPost={addPost} />}
+          element={
+            <Timeline
+              profilePage={profilePage}
+              dispatch={dispatch.bind(store)}
+            />
+          }
         />
         <Route path="friends" element={<Friends friends={users} />} />
       </Route>

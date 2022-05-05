@@ -2,15 +2,16 @@ import styles from './timeline.module.scss';
 
 import { Post } from '../../components/post';
 import { useState } from 'react';
+import { ADD_POST } from '../../state';
 
-export const Timeline = ({ profilePage, addPost }) => {
+export const Timeline = ({ profilePage, dispatch }) => {
   const { posts } = profilePage;
 
   const [input, setInput] = useState('');
 
   const onAddPost = (e) => {
     // e.preventDefault();
-    addPost(input);
+    dispatch({ type: ADD_POST, payload: input });
     setInput('');
   };
 

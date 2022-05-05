@@ -1,4 +1,4 @@
-export const ADD_POST = 'ADD_POST';
+import { ADD_POST, profileReducer } from './redux/profile-reducer';
 
 export const store = {
   state: {
@@ -42,25 +42,8 @@ export const store = {
   getState() {
     return this.state;
   },
-  addPost(postMessage) {
-    const newPost = {
-      id:
-        this.state.profilePage.posts.reduce(
-          (acc, { id }) => (acc > id ? acc : id),
-          0
-        ) + 1,
-      text: postMessage,
-    };
-    this.state.profilePage.posts.push(newPost);
-  },
-  dispatch({ type, payload }) {
-    switch (type) {
-      case ADD_POST:
-        this.addPost(payload);
-        break;
 
-      default:
-        break;
-    }
+  dispatch(action) {
+    this.state.profilePage = profileReducer(this.state.profilePage, action);
   },
 };

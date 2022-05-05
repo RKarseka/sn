@@ -3,31 +3,27 @@ import { Friends } from './pages/friends';
 import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
-import { Timeline } from './pages/timeline';
+import { TimelineContainer } from './pages/timeline/timeline-container';
+import { store } from './state';
 
-function App({ store }) {
+function App({ state }) {
   const { dispatch } = store;
 
-  const { msgs, users, profilePage } = store.getState();
+  const {
+    //  msgs, users,
+    profileReducer,
+  } = state;
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPage />} />
-        <Route
+        {/* <Route
           path="messages/*"
           element={<Messages messages={msgs} users={users} />}
-        />
-        <Route
-          path="timeline"
-          element={
-            <Timeline
-              profilePage={profilePage}
-              dispatch={dispatch.bind(store)}
-            />
-          }
-        />
-        <Route path="friends" element={<Friends friends={users} />} />
+        /> */}
+        <Route path="timeline" element={<TimelineContainer store={store} />} />
+        {/* <Route path="friends" element={<Friends friends={users} />} /> */}
       </Route>
     </Routes>
   );

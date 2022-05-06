@@ -27,8 +27,8 @@ export const Timeline = ({ posts, AddPost }) => {
         <button onClick={onAddPost}>Add post</button>
       </div>
       <div className="posts">
-        {posts.map(({ id, ...props }) => (
-          <Post key={id} {...props} />
+        {posts.map((item) => (
+          <Post key={item.id} {...item} />
         ))}
       </div>
     </section>

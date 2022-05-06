@@ -1,11 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import { Friends } from './pages/friends';
 import { FriendsC } from './pages/friends/friends-c';
 import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
 import { TimelineContainer } from './pages/timeline/timeline-container';
-import { store } from './state';
 
 function App() {
   return (

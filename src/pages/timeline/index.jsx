@@ -1,11 +1,15 @@
 import styles from './timeline.module.scss';
 
 import { Post } from '../../components/post';
-import { addPostAC } from '../../redux/profile-reducer';
 import { useState } from 'react';
 
-export const Timeline = ({ posts, onAddPost }) => {
+export const Timeline = ({ posts, AddPost }) => {
   const [input, setInput] = useState('');
+
+  const onAddPost = () => {
+    AddPost(input);
+    setInput('');
+  };
 
   return (
     <section className={styles.wrapper}>
@@ -20,14 +24,7 @@ export const Timeline = ({ posts, onAddPost }) => {
           }}
           value={input}
         />
-        <button
-          onClick={() => {
-            onAddPost(input);
-            setInput('');
-          }}
-        >
-          Add post
-        </button>
+        <button onClick={onAddPost}>Add post</button>
       </div>
       <div className="posts">
         {posts.map(({ id, ...props }) => (

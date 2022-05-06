@@ -1,4 +1,4 @@
-export const ADD_POST = 'ADD_POST';
+const ADD_POST = 'ADD_POST';
 
 const initialState = {
   posts: [

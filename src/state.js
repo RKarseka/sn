@@ -1,4 +1,4 @@
-import { ADD_POST, profileReducer } from './redux/profile-reducer';
+import { profileReducer } from './redux/profile-reducer';
 
 export const store = {
   state: {

@@ -18,7 +18,7 @@ import { addPostAC } from '../../redux/profile-reducer';
 
 const mapStateToProps = (state) => ({ posts: state.profileReducer.posts });
 const mapDispatchToProps = (dispatch) => ({
-  onAddPost: (input) => {
+  AddPost: (input) => {
     dispatch(addPostAC(input));
   },
 });

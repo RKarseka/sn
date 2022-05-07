@@ -7,8 +7,6 @@ import './index.css';
 import { store } from './redux/redux-store';
 import './scss/_normalise.scss';
 
-// console.log(store.getState());
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

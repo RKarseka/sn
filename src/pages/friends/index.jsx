@@ -1,39 +1,36 @@
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Friend } from '../../components/friend';
-import { Pagination } from '../../components/pagination';
 import { axiosGet } from '../../utils/axios';
 import styles from './friends.module.scss';
+import pagination from '../../scss/paginatin.module.scss';
 
 export const Friends = ({ users, setFriends }) => {
   const [page, setPage] = useState(1829);
-  const [totalPagesCount, setTotalPagesCount] = useState(0);
-  // console.log('render');
+  const [totalPagesCount, setTotalPagesCount] = useState(page + 1);
 
-  const handlePageClick = (data) => {
-    setPage(data.selected + 1);
-  };
-
-  const onClick = (data) => {
-    console.log(data);
-  };
+  const pageSize = 10;
 
   useEffect(() => {
     (async () => {
       try {
         await axiosGet(`/users?page=${page}`).then((data) => {
           setFriends(data.items);
-          setTotalPagesCount(data.totalCount);
+          setTotalPagesCount(Math.ceil(data.totalCount / pageSize));
         });
       } catch (error) {
         console.log(error);
       }
     })();
   }, [page]);
+
+  const handlePageClick = (data) => {
+    setPage(data.selected + 1);
+  };
+
   return (
     <section className={styles.wrapper}>
       {`Friends, page ${page}`}
-      {/* <Pagination page={page} changePage={setPage} maxPages={totalPagesCount} /> */}
 
       <ReactPaginate
         previousLabel={'<<'}
@@ -43,7 +40,13 @@ export const Friends = ({ users, setFriends }) => {
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageClick}
-        // onPageActive={onClick}
+        initialPage={page}
+        containerClassName={pagination.wrapper}
+        pageClassName={pagination.item}
+        previousClassName={pagination.item}
+        breakClassName={pagination.item}
+        nextClassName={pagination.item}
+        activeClassName={pagination.active}
       />
 
       <div className={styles.container}>

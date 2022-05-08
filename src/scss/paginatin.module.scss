@@ -1,0 +1,36 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  // grid-gap: 10px;
+}
+
+.item {
+  $color: #3f4156;
+
+  display: grid;
+  place-content: center;
+  min-width: 30px;
+  padding: 7px 4px;
+  cursor: pointer;
+  border: 1px solid var(--color-back);
+  // border-radius: 4px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  &:hover {
+    background-color: lighten($color, 65);
+  }
+}
+
+.active {
+  $color: #3f4156;
+  color: white;
+  background-color: $color;
+  &:hover {
+    color: inherit;
+    background-color: inherit;
+  }
+}
+
+.link {
+}

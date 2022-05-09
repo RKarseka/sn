@@ -27,8 +27,8 @@
   color: white;
   background-color: $color;
   &:hover {
-    color: inherit;
-    background-color: inherit;
+    color: white;
+    background-color: $color;
   }
 }
 

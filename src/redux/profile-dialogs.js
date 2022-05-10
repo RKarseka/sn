@@ -1,3 +1,3 @@
-export const dialogsReducer = (state, { type, payload }) => {
-  return state;
-};
+// export const dialogsReducer = (state, { type, payload }) => {
+//   return state;
+// };

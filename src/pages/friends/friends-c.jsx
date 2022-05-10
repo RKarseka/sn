@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { Friends } from '.';
-import { setUsersAC } from '../../redux/users-reducer';
-const mapStateToProps = (state) => ({ users: state.usersReducer.users });
+import { setPageSizeAC } from '../../redux/app-reducer';
+
+const mapStateToProps = (state) => ({ pageSize: state.appReducer.pageSize });
+
 const mapDispatchToProps = (dispatch) => ({
-  setFriends: (users) => {
-    dispatch(setUsersAC(users));
+  setPageSize: (pageSize) => {
+    dispatch(setPageSizeAC(pageSize));
   },
 });
 

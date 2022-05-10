@@ -1,8 +1,9 @@
 import { combineReducers, createStore } from 'redux';
 import { profileReducer } from './profile-reducer';
 import { usersReducer } from './users-reducer';
+import { appReducer } from './app-reducer';
 
-const reducers = combineReducers({ profileReducer, usersReducer });
+const reducers = combineReducers({ appReducer, profileReducer, usersReducer });
 
 export const store = createStore(reducers);
 

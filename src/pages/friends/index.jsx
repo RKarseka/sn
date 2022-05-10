@@ -8,8 +8,7 @@ import pagination from '../../scss/paginatin.module.scss';
 export const Friends = ({ users, setFriends }) => {
   const [page, setPage] = useState(1829);
   const [totalPagesCount, setTotalPagesCount] = useState(page + 1);
-
-  const pageSize = 10;
+  const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
     (async () => {

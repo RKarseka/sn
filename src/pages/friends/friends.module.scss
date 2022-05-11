@@ -5,3 +5,19 @@
   display: grid;
   grid-gap: 20px;
 }
+
+.header {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.drop {
+  display: grid;
+  grid-auto-flow: column;
+  // justify-content: end;
+  align-items: center;
+  grid-gap: 10px;
+}

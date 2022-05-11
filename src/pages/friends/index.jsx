@@ -3,13 +3,13 @@ import ReactPaginate from 'react-paginate';
 import { Friend } from '../../components/friend';
 import { axiosGet } from '../../utils/axios';
 import styles from './friends.module.scss';
-import pagination from '../../scss/paginatin.module.scss';
 import { DropdownMenu } from './dropdown';
+import { Form } from 'react-bootstrap';
 
 export const Friends = ({ pageSize, setPageSize }) => {
   // const [page, setPage] = useState(Math.ceil(18290 / pageSize));
 
-  const startPage = 171;
+  const startPage = 1;
   const [page, setPage] = useState(startPage);
 
   // const [totalPagesCount, setTotalPagesCount] = useState(page + 1);
@@ -17,19 +17,26 @@ export const Friends = ({ pageSize, setPageSize }) => {
 
   const [friends, setFriends] = useState([]);
 
+  const [search, setSearch] = useState('');
+
   useEffect(() => {
     (async () => {
       try {
-        await axiosGet(`/users?page=${page}&count=${pageSize}`).then((data) => {
-          setTotalPages(Math.ceil(data.totalCount / pageSize));
-          if (page <= Math.ceil(data.totalCount / pageSize))
+        await axiosGet(
+          `/users?page=${page}&count=${pageSize}&term=${search}`
+        ).then((data) => {
+          setTotalPages(Math.ceil(data.totalCount / pageSize) || 1);
+          if (
+            page <= Math.ceil(data.totalCount / pageSize) ||
+            data.totalCount === 0
+          )
             setFriends(data.items);
         });
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [page, pageSize]);
+  }, [page, pageSize, search]);
 
   page > totalPages && setPage(totalPages);
 
@@ -39,27 +46,43 @@ export const Friends = ({ pageSize, setPageSize }) => {
 
   return (
     <section className={styles.wrapper}>
-      {`Friends, page ${page}`}
-      <div className="">
-        Friends on page:
-        <DropdownMenu pageSize={pageSize} setPageSize={setPageSize} />
+      <div className={styles.header}>
+        <Form.Control
+          type="text"
+          aria-describedby="search users"
+          size="sm"
+          placeholder="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Form.Check disabled type="switch" label="followed" />
+
+        <div className={styles.drop}>
+          Friends on page:
+          <DropdownMenu pageSize={pageSize} setPageSize={setPageSize} />
+        </div>
       </div>
 
       <ReactPaginate
-        previousLabel={'<<'}
-        nextLabel={'>>'}
+        previousLabel={'«'}
+        nextLabel={'»'}
         breakLabel={'...'}
         pageCount={totalPages}
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageClick}
         forcePage={page - 1}
-        containerClassName={pagination.wrapper}
-        pageClassName={pagination.item}
-        previousClassName={pagination.item}
-        breakClassName={pagination.item}
-        nextClassName={pagination.item}
-        activeClassName={pagination.active}
+        disableInitialCallback={true}
+        containerClassName={'pagination pagination-secondary'}
+        pageClassName={'page-item pagination-secondary'}
+        pageLinkClassName={'page-link'}
+        previousClassName={'page-item'}
+        previousLinkClassName={'page-link secondary'}
+        nextClassName={'page-item'}
+        nextLinkClassName={'page-link'}
+        breakClassName={'page-item'}
+        breakLinkClassName={'page-link'}
+        activeClassName={'active'}
       />
 
       <div className={styles.container}>

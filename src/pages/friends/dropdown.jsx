@@ -1,6 +1,5 @@
 // import React from 'react';
-import Button from 'react-bootstrap/Button';
-import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 export const DropdownMenu = ({ pageSize, setPageSize }) => {
@@ -22,6 +21,8 @@ export const DropdownMenu = ({ pageSize, setPageSize }) => {
   return (
     <>
       <DropdownButton
+        size="sm"
+        variant={'secondary'}
         onSelect={(event) => {
           const vol = state[event].vol;
           localStorage.setItem('pagesize', vol);

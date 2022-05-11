@@ -1,7 +1,8 @@
 const PAGE_SIZE = 'PAGE_SIZE';
 
 const initialState = {
-  pageSize: localStorage.getItem('pagesize') || 10,
+  pageSize: localStorage.getItem('pagesize') || 25,
+  isAuth: false,
 };
 
 export const appReducer = (state = initialState, { type, payload }) => {

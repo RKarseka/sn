@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import ReactPaginate from 'react-paginate';
 import { Friend } from '../../components/friend';
 import { axiosGet } from '../../utils/axios';
 import styles from './friends.module.scss';
 import { DropdownMenu } from './dropdown';
 import { Form } from 'react-bootstrap';
+import { Pagination } from './pagination';
 
-export const Friends = ({ pageSize, setPageSize }) => {
+export const Friends = ({ pageSize, setPageSize, isAuth }) => {
   // const [page, setPage] = useState(Math.ceil(18290 / pageSize));
 
-  const startPage = 1;
+  const startPage = 171;
   const [page, setPage] = useState(startPage);
 
   // const [totalPagesCount, setTotalPagesCount] = useState(page + 1);
@@ -18,6 +18,8 @@ export const Friends = ({ pageSize, setPageSize }) => {
   const [friends, setFriends] = useState([]);
 
   const [search, setSearch] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -40,10 +42,6 @@ export const Friends = ({ pageSize, setPageSize }) => {
 
   page > totalPages && setPage(totalPages);
 
-  const handlePageClick = (data) => {
-    setPage(data.selected + 1);
-  };
-
   return (
     <section className={styles.wrapper}>
       <div className={styles.header}>
@@ -55,41 +53,27 @@ export const Friends = ({ pageSize, setPageSize }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Form.Check disabled type="switch" label="followed" />
+        <Form.Check disabled={!isAuth} type="switch" label="followed" />
 
         <div className={styles.drop}>
           Friends on page:
-          <DropdownMenu pageSize={pageSize} setPageSize={setPageSize} />
+          <DropdownMenu
+            pageSize={pageSize}
+            setPageSize={setPageSize}
+            setPage={setPage}
+          />
         </div>
       </div>
 
-      <ReactPaginate
-        previousLabel={'«'}
-        nextLabel={'»'}
-        breakLabel={'...'}
-        pageCount={totalPages}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={3}
-        onPageChange={handlePageClick}
-        forcePage={page - 1}
-        disableInitialCallback={true}
-        containerClassName={'pagination pagination-secondary'}
-        pageClassName={'page-item pagination-secondary'}
-        pageLinkClassName={'page-link'}
-        previousClassName={'page-item'}
-        previousLinkClassName={'page-link secondary'}
-        nextClassName={'page-item'}
-        nextLinkClassName={'page-link'}
-        breakClassName={'page-item'}
-        breakLinkClassName={'page-link'}
-        activeClassName={'active'}
-      />
+      <Pagination totalPages={totalPages} page={page} />
 
       <div className={styles.container}>
         {friends.map((item) => (
-          <Friend key={item.id} {...item} />
+          <Friend key={item.id} isAuth={isAuth} {...item} />
         ))}
       </div>
+
+      <Pagination totalPages={totalPages} page={page} setPage={setPage} />
     </section>
   );
 };

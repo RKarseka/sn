@@ -65,7 +65,7 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
         </div>
       </div>
 
-      <Pagination totalPages={totalPages} page={page} />
+      <Pagination totalPages={totalPages} page={page} setPage={setPage} />
 
       <div className={styles.container}>
         {friends.map((item) => (

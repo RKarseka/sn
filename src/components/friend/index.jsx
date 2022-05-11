@@ -1,5 +1,3 @@
-import styles from './friend.module.scss';
-import imgAvatarMini from '../../assets/img/user.jpg';
 import { Button, Card, OverlayTrigger, Popover } from 'react-bootstrap';
 import { getRandomInt } from '../../utils';
 
@@ -11,7 +9,8 @@ export const Friend = ({
   followed,
   isAuth,
 }) => {
-  const hugeStatus = status?.length > 30;
+  const hugeStatusLength = 20;
+  const isHugeStatus = status?.length > hugeStatusLength;
   const imgAvatarMini = `./public/users/user-${getRandomInt(1, 21)}.svg`;
 
   return (
@@ -27,7 +26,7 @@ export const Friend = ({
           <Card.Text className="text-muted">id: {id}</Card.Text>
 
           <OverlayTrigger
-            trigger={hugeStatus ? ['hover', 'click', 'focus'] : 'focus'}
+            trigger={isHugeStatus ? ['hover', 'click', 'focus'] : 'focus'}
             overlay={
               <Popover id="tooltip">
                 <Popover.Body>{status}</Popover.Body>
@@ -35,7 +34,9 @@ export const Friend = ({
             }
           >
             <span className="d-inline-block">
-              {hugeStatus ? `${status.slice(0, 28)}...` : status}
+              {isHugeStatus
+                ? `${status.slice(0, hugeStatusLength - 2)}...`
+                : status}
             </span>
           </OverlayTrigger>
         </Card.Body>

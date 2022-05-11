@@ -22,7 +22,7 @@ export const Pagination = ({ ...props }) => {
   );
 };
 
-const PaginationC = ({ totalPages, page, style, ...props }) => {
+const PaginationC = ({ totalPages, page, style, setPage, ...props }) => {
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
   };

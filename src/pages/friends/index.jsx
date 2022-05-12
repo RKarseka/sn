@@ -23,11 +23,10 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
       try {
         await axiosGet(
           // `/users?page=${page}&count=${pageSize}&term=${search}`
-          `/users?p=${page}&l=${pageSize}&term=${search}` //mockapi
+          `/users?p=${page}&l=${pageSize}${search ? '&search=' + search : ''}` //mockapi
         ).then((data) => {
           // setTotalPages(Math.ceil(data.totalCount / pageSize) || 1);
           setTotalPages(Math.ceil(100 / pageSize) || 1); //mockapi
-
           // if (
           //   page <= Math.ceil(data.totalCount / pageSize) ||
           //   data.totalCount === 0

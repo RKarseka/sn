@@ -4,7 +4,6 @@ import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
 import { TimelineContainer } from './pages/timeline/timeline-container';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

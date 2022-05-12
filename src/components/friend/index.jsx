@@ -5,7 +5,9 @@ export const Friend = ({
   id,
   name,
   status,
-  photos: { small, large },
+  // photos: { small, large },
+  small, //mockapi
+
   followed,
   isAuth,
 }) => {

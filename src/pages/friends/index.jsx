@@ -7,12 +7,9 @@ import { Form } from 'react-bootstrap';
 import { Pagination } from './pagination';
 
 export const Friends = ({ pageSize, setPageSize, isAuth }) => {
-  // const [page, setPage] = useState(Math.ceil(18290 / pageSize));
-
-  const startPage = 171;
+  const startPage = 2;
   const [page, setPage] = useState(startPage);
 
-  // const [totalPagesCount, setTotalPagesCount] = useState(page + 1);
   const [totalPages, setTotalPages] = useState(page);
 
   const [friends, setFriends] = useState([]);
@@ -25,14 +22,18 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
     (async () => {
       try {
         await axiosGet(
-          `/users?page=${page}&count=${pageSize}&term=${search}`
+          // `/users?page=${page}&count=${pageSize}&term=${search}`
+          `/users?p=${page}&l=${pageSize}&term=${search}` //mockapi
         ).then((data) => {
-          setTotalPages(Math.ceil(data.totalCount / pageSize) || 1);
-          if (
-            page <= Math.ceil(data.totalCount / pageSize) ||
-            data.totalCount === 0
-          )
-            setFriends(data.items);
+          // setTotalPages(Math.ceil(data.totalCount / pageSize) || 1);
+          setTotalPages(Math.ceil(100 / pageSize) || 1); //mockapi
+
+          // if (
+          //   page <= Math.ceil(data.totalCount / pageSize) ||
+          //   data.totalCount === 0
+          // )
+          // setFriends(data.items);
+          setFriends(data);
         });
       } catch (error) {
         console.log(error);

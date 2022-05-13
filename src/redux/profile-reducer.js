@@ -24,4 +24,4 @@ export const profileReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const addPostAC = (text) => ({ type: ADD_POST, payload: text });
+export const addPost = (text) => ({ type: ADD_POST, payload: text });

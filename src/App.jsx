@@ -3,7 +3,7 @@ import { FriendsC } from './pages/friends/friends-c';
 import { Layout } from './pages/layout';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
-import { TimelineContainer } from './pages/timeline/timeline-container';
+import { TimelineC } from './pages/timeline/timeline-container';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           path="messages/*"
           element={<Messages messages={msgs} users={users} />}
         /> */}
-        <Route path="timeline" element={<TimelineContainer />} />
+        <Route path="timeline" element={<TimelineC />} />
         <Route path="friends" element={<FriendsC />} />
       </Route>
     </Routes>

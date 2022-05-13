@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import classNames from 'classnames';
 
-export const Timeline = ({ posts, AddPost }) => {
+export const Timeline = ({ posts, addPost }) => {
   const [input, setInput] = useState('');
 
   const onAddPost = () => {
-    AddPost(input);
+    addPost(input);
     setInput('');
   };
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Friend } from '../../components/friend';
-import { axiosGet } from '../../utils/axios';
-import styles from './friends.module.scss';
+import { Form, Spinner } from 'react-bootstrap';
 import { DropdownMenu } from './dropdown';
-import { Form } from 'react-bootstrap';
+import { axiosGet } from '../../utils/axios';
+import { Friend } from '../../components/friend';
 import { Pagination } from './pagination';
+import styles from './friends.module.scss';
 
 export const Friends = ({ pageSize, setPageSize, isAuth }) => {
   const startPage = 2;
@@ -20,6 +20,7 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       try {
         await axiosGet(
           // `/users?page=${page}&count=${pageSize}&term=${search}`
@@ -37,6 +38,7 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
       } catch (error) {
         console.log(error);
       }
+      setIsLoading(false);
     })();
   }, [page, pageSize, search]);
 
@@ -44,36 +46,49 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
 
   return (
     <section className={styles.wrapper}>
-      <div className={styles.header}>
-        <Form.Control
-          type="text"
-          aria-describedby="search users"
-          size="sm"
-          placeholder="search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <Form.Check disabled={!isAuth} type="switch" label="followed" />
-
-        <div className={styles.drop}>
-          Friends on page:
-          <DropdownMenu
-            pageSize={pageSize}
-            setPageSize={setPageSize}
-            setPage={setPage}
-          />
+      {isLoading ? (
+        <div className={styles.spinner}>
+          <div className="">
+            <Spinner animation="border" variant="secondary" />
+            <Spinner animation="border" variant="info" />
+            <Spinner animation="border" variant="warning" />
+          </div>
+          <h4>Loading...</h4>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className={styles.header}>
+            <Form.Control
+              type="text"
+              aria-describedby="search users"
+              size="sm"
+              placeholder="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <Form.Check disabled={!isAuth} type="switch" label="followed" />
 
-      <Pagination totalPages={totalPages} page={page} setPage={setPage} />
+            <div className={styles.drop}>
+              Friends on page:
+              <DropdownMenu
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                setPage={setPage}
+              />
+            </div>
+          </div>
 
-      <div className={styles.container}>
-        {friends.map((item) => (
-          <Friend key={item.id} isAuth={isAuth} {...item} />
-        ))}
-      </div>
+          <Pagination totalPages={totalPages} page={page} setPage={setPage} />
 
-      <Pagination totalPages={totalPages} page={page} setPage={setPage} />
+          <div className={styles.container}>
+            {friends.map((item) => (
+              <Friend key={item.id} isAuth={isAuth} {...item} />
+            ))}
+          </div>
+
+          <Pagination totalPages={totalPages} page={page} setPage={setPage} />
+        </>
+      )}
     </section>
   );
 };

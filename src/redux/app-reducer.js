@@ -14,4 +14,4 @@ export const appReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const setPageSizeAC = (size) => ({ type: PAGE_SIZE, payload: size });
+export const setPageSize = (size) => ({ type: PAGE_SIZE, payload: size });

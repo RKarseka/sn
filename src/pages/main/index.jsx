@@ -5,7 +5,7 @@ import styles from './main.module.scss';
 export const MainPage = () => {
   return (
     <section className={styles.wrapper}>
-      <div className="app">
+      <div className="app text-center">
         <h1>Social newtwork</h1>
         <Image src={imgInProcess} />
         <ProgressBar animated now={55} />

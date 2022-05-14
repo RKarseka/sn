@@ -1,0 +1,12 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  grid-gap: 20px;
+  align-items: center;
+  @media screen and (max-width: 500px) {
+    grid-auto-flow: unset;
+    justify-content: center;
+    justify-items: center;
+  }
+}

@@ -4,6 +4,8 @@ import { DropdownMenu } from './dropdown';
 import { axiosGet } from '../../utils/axios';
 import { Friend } from '../../components/friend';
 import { Pagination } from './pagination';
+import { SpinnerComp } from '../../components/spinner';
+
 import styles from './friends.module.scss';
 
 export const Friends = ({ pageSize, setPageSize, isAuth }) => {
@@ -23,17 +25,14 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
       setIsLoading(true);
       try {
         await axiosGet(
-          // `/users?page=${page}&count=${pageSize}&term=${search}`
-          `/users?p=${page}&l=${pageSize}${search ? '&search=' + search : ''}` //mockapi
+          `/users?page=${page}&count=${pageSize}&term=${search}`
         ).then((data) => {
-          // setTotalPages(Math.ceil(data.totalCount / pageSize) || 1);
-          setTotalPages(Math.ceil(100 / pageSize) || 1); //mockapi
-          // if (
-          //   page <= Math.ceil(data.totalCount / pageSize) ||
-          //   data.totalCount === 0
-          // )
-          // setFriends(data.items);
-          setFriends(data);
+          setTotalPages(Math.ceil(data.totalCount / pageSize) || 1);
+          if (
+            page <= Math.ceil(data.totalCount / pageSize) ||
+            data.totalCount === 0
+          )
+            setFriends(data.items);
         });
       } catch (error) {
         console.log(error);
@@ -47,14 +46,7 @@ export const Friends = ({ pageSize, setPageSize, isAuth }) => {
   return (
     <section className={styles.wrapper}>
       {isLoading ? (
-        <div className={styles.spinner}>
-          <div className="">
-            <Spinner animation="border" variant="secondary" />
-            <Spinner animation="border" variant="info" />
-            <Spinner animation="border" variant="warning" />
-          </div>
-          <h4>Loading...</h4>
-        </div>
+        <SpinnerComp />
       ) : (
         <>
           <div className={styles.header}>

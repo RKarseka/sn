@@ -19,8 +19,8 @@ export const NavMenu = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav variant="tabs" className="me-auto">
-            <Nav.Link as={NavLink} to={'/'}>
-              Home
+            <Nav.Link as={NavLink} to={'/profile/8'}>
+              Profile
             </Nav.Link>
             <Nav.Link as={NavLink} to={'/friends'}>
               Friends

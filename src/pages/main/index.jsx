@@ -11,7 +11,7 @@ export const MainPage = () => {
         <ProgressBar animated now={55} />
 
         <h3>The website is under construction</h3>
-        <h5>You can try Friends and Timeline pages</h5>
+        <h5>You can try Profile, Friends and Timeline pages</h5>
       </div>
     </section>
   );

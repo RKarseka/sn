@@ -1,9 +1,10 @@
-import styles from './timeline.module.scss';
+import { useState } from 'react';
+import classNames from 'classnames';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 
 import { Post } from '../../components/post';
-import { useState } from 'react';
-import { Button, FormControl, InputGroup } from 'react-bootstrap';
-import classNames from 'classnames';
+
+import styles from './timeline.module.scss';
 
 export const Timeline = ({ posts, addPost }) => {
   const [input, setInput] = useState('');

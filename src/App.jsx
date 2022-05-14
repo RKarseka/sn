@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { FriendsC } from './pages/friends/friends-c';
-import { Layout } from './pages/layout';
+import { LayoutC } from './pages/layout/LayoutC';
+import { Login } from './pages/login';
 import { MainPage } from './pages/main';
 import { Messages } from './pages/messages';
 import { ProfileC } from './pages/profile/profile-c';
@@ -9,7 +10,7 @@ import { TimelineC } from './pages/timeline/timeline-container';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<LayoutC />}>
         <Route index element={<MainPage />} />
         {/* <Route
           path="messages/*"
@@ -18,6 +19,7 @@ function App() {
         <Route path="profile/:userId" element={<ProfileC />} />
         <Route path="timeline" element={<TimelineC />} />
         <Route path="friends" element={<FriendsC />} />
+        <Route path="login" element={<Login />} />
       </Route>
     </Routes>
   );

@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 import { UserPhoto } from '../user-photo';
 import styles from './nav.module.scss';
 
-export const NavMenu = () => {
+export const NavMenu = ({ isAuth, ...props }) => {
   return (
     <Navbar
       expand="sm"
@@ -13,9 +13,7 @@ export const NavMenu = () => {
       collapseOnSelect
     >
       <Container>
-        <Navbar.Brand>
-          <UserPhoto />
-        </Navbar.Brand>
+        <Navbar.Brand>{isAuth && <UserPhoto {...props} />}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav variant="tabs" className="me-auto">
@@ -37,6 +35,7 @@ export const NavMenu = () => {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      {!isAuth && <Link to={'/login'}>Login</Link>}
     </Navbar>
   );
 };

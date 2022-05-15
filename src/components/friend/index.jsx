@@ -42,9 +42,9 @@ export const Friend = ({
   const toggleFollow = () => {
     handeleAPIRequest(
       followed ? 'del' : 'post',
-      setisFollowBtnBlock,
+      `/follow/${id}`,
       handelfollowtoggle,
-      `/follow/${id}`
+      setisFollowBtnBlock
     );
   };
   useEffect(() => {

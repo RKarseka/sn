@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { connect } from 'react-redux';
 import { setAuthUserData, setUserAuth } from '../../redux/app-reducer';
-import { loadData } from '../../utils/loadData';
+import { handeleAPIRequest, loadData } from '../../utils/loadData';
 
 import { Layout } from '.';
 
@@ -12,11 +12,13 @@ export const LayoutAPI = ({ isAuth, me, setUserAuth, setAuthUserData }) => {
   useEffect(() => {
     const setAuth = ({ resultCode, data }) => {
       setUserAuth(!resultCode);
-      setAuthUserData(data);
+      if (!resultCode)
+        handeleAPIRequest('get', `/profile/${data.id}`, (dataAPI) =>
+          setAuthUserData({ ...me, ...data, ...dataAPI })
+        );
     };
-    loadData(setIsLoading, setAuth, '/auth/me', { withCredentials: true });
+    handeleAPIRequest('get', '/auth/me', setAuth);
   }, []);
-
   return <Layout isAuth={isAuth} me={me} />;
 };
 

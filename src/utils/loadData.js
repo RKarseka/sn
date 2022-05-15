@@ -14,9 +14,9 @@ export const loadData = async (setLoading, setData, url, params = {}) => {
 
 export const handeleAPIRequest = async (
   type,
-  setLoading,
-  handelResponse,
   path,
+  handelResponse,
+  setLoading,
   item
 ) => {
   const option = {
@@ -26,7 +26,7 @@ export const handeleAPIRequest = async (
     headers: { 'API-KEY': '2e948e01-3fcf-4d73-8215-215eb8c32a95' },
   };
 
-  setLoading(true);
+  setLoading && setLoading(true);
 
   try {
     switch (type) {
@@ -40,6 +40,11 @@ export const handeleAPIRequest = async (
           .post(BASE_URL + path, item, { ...option, ...key })
           .then(({ data }) => handelResponse(data.resultCode));
         break;
+      case 'get':
+        await axios
+          .get(BASE_URL + path, { ...option })
+          .then(({ data }) => handelResponse(data));
+        break;
       default:
         console.log('incorrect request type');
         break;
@@ -47,5 +52,5 @@ export const handeleAPIRequest = async (
   } catch (error) {
     console.log(error);
   }
-  setLoading(false);
+  setLoading && setLoading(false);
 };

@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { UserPhoto } from '../user-photo';
 import styles from './nav.module.scss';
 
-export const NavMenu = ({ isAuth, ...props }) => {
+export const NavMenu = ({ isAuth, me, ...props }) => {
   return (
     <Navbar
       expand="sm"
@@ -17,7 +17,7 @@ export const NavMenu = ({ isAuth, ...props }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav variant="tabs" className="me-auto">
-            <Nav.Link as={NavLink} to={'/profile/8'}>
+            <Nav.Link as={NavLink} to={`/profile/${me.id}`}>
               Profile
             </Nav.Link>
             <Nav.Link as={NavLink} to={'/friends'}>

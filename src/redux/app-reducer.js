@@ -9,6 +9,24 @@ const initialState = {
     id: null,
     email: null,
     login: null,
+    aboutMe: null,
+    contacts: {
+      facebook: null,
+      website: null,
+      vk: null,
+      twitter: null,
+      instagram: null,
+      github: null,
+      mainLink: null,
+      youtube: null,
+    },
+    fullName: null,
+    lookingForAJob: false,
+    lookingForAJobDescription: null,
+    photos: {
+      small: '',
+      large: '',
+    },
   },
 };
 

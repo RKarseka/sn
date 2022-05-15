@@ -2,28 +2,22 @@ import { useEffect, useState } from 'react';
 import { Profile } from '.';
 
 import { connect } from 'react-redux';
-import { loadData } from '../../utils/loadData';
+import { handeleAPIRequest } from '../../utils/loadData';
 import { SpinnerComp } from '../../components/spinner';
 import { useParams } from 'react-router-dom';
-import { getRandomAvatar } from '../../utils';
 
-const ProfileAPI = () => {
-  const { userId } = useParams(2);
+const ProfileAPI = ({ me }) => {
+  const { userId } = useParams();
 
-  const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const url = `/profile/${userId}`;
+  const [profile, setProfile] = useState(me);
 
   useEffect(() => {
-    loadData(setIsLoading, setProfile, url, { withCredentials: true });
+    if (profile.id !== +userId) {
+      handeleAPIRequest('get', `/profile/${userId}`, setProfile, setIsLoading);
+    }
   }, [userId]);
-
-  if (!profile.photos?.large)
-    setProfile((prev) => ({
-      ...prev,
-      photos: { large: `${getRandomAvatar()}` },
-    }));
 
   return (
     <section className="wrapper">
@@ -32,6 +26,6 @@ const ProfileAPI = () => {
   );
 };
 
-const mapStateToProps = (state) => ({ state });
+const mapStateToProps = ({ app }) => ({ me: app.me });
 
 export const ProfileC = connect(mapStateToProps, {})(ProfileAPI);

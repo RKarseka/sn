@@ -14,8 +14,9 @@ export const Profile = ({
   const contactsArr = [];
 
   for (const key in contacts) {
-    contactsArr.push({ key, isPresent: contacts[key] });
+    contacts[key] && contactsArr.push({ key, isPresent: contacts[key] });
   }
+
   return (
     <section className={styles.wrapper}>
       <Image
@@ -53,3 +54,9 @@ export const Profile = ({
     </section>
   );
 };
+
+// if (!profile.photos?.large)
+// setProfile((prev) => ({
+//   ...prev,
+//   photos: { large: `${getRandomAvatar()}` },
+// }));

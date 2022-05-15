@@ -3,7 +3,6 @@ import imgUser from '../../assets/img/user.jpg';
 import styles from './photo.module.scss';
 
 export const UserPhoto = ({ me }) => {
-  console.log(me);
   return (
     <Link to={'/'}>
       <img

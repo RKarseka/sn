@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Button, Card, OverlayTrigger, Popover } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import { getRandomAvatar } from '../../utils';
+import { handeleAPIRequest } from '../../utils/loadData';
 
 const FriendPhoto = ({ to, src }) => {
   return (
@@ -20,9 +22,34 @@ export const Friend = ({
 
   followed,
   isAuth,
+  setFriends,
 }) => {
   const hugeStatusLength = 20;
   const isHugeStatus = status?.length > hugeStatusLength;
+
+  const [isFollowBtnBlock, setisFollowBtnBlock] = useState(!isAuth);
+  const [randomAvatar, setRandomAvatar] = useState();
+
+  const handelfollowtoggle = (data) => {
+    data === 0 &&
+      setFriends((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, followed: !followed } : item
+        )
+      );
+  };
+
+  const toggleFollow = () => {
+    handeleAPIRequest(
+      followed ? 'del' : 'post',
+      setisFollowBtnBlock,
+      handelfollowtoggle,
+      `/follow/${id}`
+    );
+  };
+  useEffect(() => {
+    setRandomAvatar(getRandomAvatar());
+  }, []);
 
   return (
     <>
@@ -32,7 +59,7 @@ export const Friend = ({
           to={`/profile/${id}`}
           variant="top"
           className={small ? 'mb-2' : 'mt-2'}
-          src={small || getRandomAvatar()}
+          src={small || randomAvatar}
         />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
@@ -55,8 +82,9 @@ export const Friend = ({
         </Card.Body>
         <Card.Footer>
           <Button
-            disabled={!isAuth}
+            disabled={isFollowBtnBlock}
             variant={followed ? 'secondary' : 'success'}
+            onClick={toggleFollow}
           >
             {followed ? 'unfollow' : 'follow'}
           </Button>

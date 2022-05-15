@@ -8,6 +8,9 @@ export const axiosGetMockapi = (path) =>
   axios.get(`${BASE_URL_mockapi}${path}`).then(({ data }) => data);
 
 export const axiosDelId = (path, id) => axios.delete(`${path}/${id}`);
+export const axiosDel = (path, id) => axios.delete(`${path}/${id}`);
 
-export const axiosPost = (path, item) =>
-  axios.post(path, item).then(({ data }) => data.id);
+export const axiosPost = (path, item, params = null) =>
+  axios
+    .post(`${BASE_URL}${path}`, item, params)
+    .then(({ data }) => data.resultCode);

@@ -16,7 +16,7 @@ const ProfileAPI = () => {
   const url = `/profile/${userId}`;
 
   useEffect(() => {
-    loadData(setIsLoading, setProfile, url);
+    loadData(setIsLoading, setProfile, url, { withCredentials: true });
   }, [userId]);
 
   if (!profile.photos?.large)
